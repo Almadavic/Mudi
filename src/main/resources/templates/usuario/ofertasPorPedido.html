@@ -1,0 +1,42 @@
+<html>
+<head th:replace="~{base :: head}"></head >
+<body>
+<div th:replace="~{base::logo}"></div>
+
+
+	<div class="container">
+		<div th:replace="~{base::titulo('Ofertas do pedido')}"></div>
+
+	
+		
+		<div class="card mb-3" th:each="ofertas : ${ofertas}">
+		
+			
+			<div class="card-header alert-dark">Oferta</div >
+		
+			
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-sm-8 mb-3">
+						<div class="row ">
+							<div class="col-md-5">Valor: <span th:if="${ofertas.valor}!=null" th:text="${'R$ '+ #numbers.formatDecimal(ofertas.valor,3,'POINT',2,'COMMA')}">200,99</span ></div>
+							<div class="col-md-6">Data da entrega: <span th:text="${#calendars.format(ofertas.dataEntrega, 'dd/MM/yyyy')}">10/02/2020</span>
+							</div>
+						</div>
+						
+
+						<div>Comentário</div>
+						<div>
+							<textarea disabled="disabled" class="form-control" th:text="${ofertas.comentario}">Comentario da Oferta</textarea >
+						</div>
+					</div>
+					<div class="col-12 col-sm-4">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
