@@ -20,15 +20,8 @@ import br.com.alura.mvc.mudi.services.PedidoService;
 import br.com.alura.mvc.mudi.services.UserService;
 
 @Controller
-@RequestMapping("usuario")
+@RequestMapping("/usuario")
 public class UsuarioController {
-	
-	@GetMapping
-	public String retornaPagina() {
-		return "redirect:/usuario/pedido";
-	}
-		
-	
 	
 	@Autowired
 	private UserService userService;

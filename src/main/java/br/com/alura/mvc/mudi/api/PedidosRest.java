@@ -1,5 +1,6 @@
 package br.com.alura.mvc.mudi.api;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,16 @@ public class PedidosRest {
 	@Autowired
 	private PedidoService service;
 
-	@GetMapping("aguardando")
-	public List<Pedido> getPedidosAguardandoOfertas() {
+	@GetMapping("/aguardando")
+	public List<Pedido> getPedidosAguardandoOfertas(Principal principal) {
 
 		Sort sort = Sort.by("id").descending();
 
 		PageRequest pr = PageRequest.of(0, 10, sort);
-		return service.findByStatus(StatusPedido.AGUARDANDO, pr);
+		List<Pedido> pedido = service.findByStatus(StatusPedido.AGUARDANDO, pr);
+
+		pedido.removeIf(p -> p.getUser().getUsername().equals(principal.getName()));
+		return pedido;
 	}
 
 }
